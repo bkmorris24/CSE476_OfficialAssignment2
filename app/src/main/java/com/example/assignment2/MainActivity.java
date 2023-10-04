@@ -2,50 +2,33 @@ package com.example.assignment2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-import androidx.annotation.NonNull;
+/**
+ * Main Activity page, displays the login screen
+ */
+public class MainActivity extends AppCompatActivity {
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
-
-    BottomNavigationView bottomNavigationView;
-
+    // Function that generates initial screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.homeFrag);
-    }
+        // button variable to handle the sign in button displayed in activity_main.xml
+        Button button = findViewById(R.id.signin);
 
-    homeFrag hf = new homeFrag();
-    conFrag cf = new conFrag();
-    searchFrag sf = new searchFrag();
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item){
-
-        if (item.getItemId() == R.id.home){
-            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, hf).commit();
-            return true;
-        }
-        else if (item.getItemId() == R.id.content){
-            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, cf).commit();
-            return true;
-        }
-        else if (item.getItemId() == R.id.search){
-            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, sf).commit();
-            return true;
-        }
-        else {
-            return false;
-        }
-
+        // Function that handles the traversal from the sign in page to the homepage of the app
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, homeAct.class);
+                startActivity(intent);
+            }
+        });
     }
 }
